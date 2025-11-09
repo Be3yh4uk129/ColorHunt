@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Hunt Game</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/media-queries.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header_inner">
+          <div class="header_left">
+            <div class="header_logo"><a href="index.html">ColorHunt</a></div>
+          </div>
+          <div class="header_right">
+            <nav class="nav">
+              <ul class="nav_list">
+                <li class="nav_item">
+                  <a href="index.html" class="nav_link">Главная</a>
+                </li>
+                <li class="nav_item">
+                  <a href="record.html" class="nav_link">Рекорд</a>
+                </li>
+              </ul>
+            </nav>
+            <div class="header_icons">
+              <a href="signin.html" class="login-icon theme-toggle"
+                ><i class="fa fa-user-o" aria-hidden="true"></i
+              ></a>
+              <button id="theme-toggle" class="theme-toggle">🌙</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="main" class="content-section">
+      <div id="game">
+        <div id="start-screen">
+          <h1>Найди отличающийся цвет :)</h1>
+          <button id="start-button">Начать игру</button>
+        </div>
+
+        <div id="game-screen" class="hide">
+          <p id="question-text">Найдите отличающийся цвет</p>
+          <p id="current-score">Счёт: 0</p>
+          <p id="timer">⏱ Время: 0 сек</p>
+          <div id="grid"></div>
+          <button id="next-button" class="hide">Следующий</button>
+        </div>
+
+        <div id="result-screen" class="hide">
+          <h2>Поздравляем!</h2>
+          <p id="final-score"></p>
+          <p id="record-time"></p>
+          <div id="congratulation-message" class="congratulation-message hide">
+            🎉 ЕЕЕЕ делаешь мага есже 🎉
+          </div>
+          <div id="fireworks-container"></div>
+          <button id="restart-button">Начать снова</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer_inner">
+          <div class="footer_links">
+            <a href="https://www.facebook.com/" class="footer_link"
+              ><i class="fa fa-facebook" aria-hidden="true"></i
+            ></a>
+            <a href="https://www.instagram.com/?hl=ru" class="footer_link"
+              ><i class="fa fa-instagram" aria-hidden="true"></i
+            ></a>
+            <a href="https://x.com/" class="footer_link"
+              ><i class="fa fa-twitter" aria-hidden="true"></i
+            ></a>
+          </div>
+          <span
+            >© 2025 ColorHunt by Adema Olzhas Amir | Все права ущемлены у мужлан
+            нет прав</span
+          >
+        </div>
+      </div>
+      <p></p>
+    </footer>
+    <script src="scripts/common.js"></script>
+<script src="scripts/main.js"></script>
+  </body>
+</html>

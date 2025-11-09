@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ColorHunt</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/media-queries.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header_inner">
+          <div class="header_left">
+            <div class="header_logo"><a href="index.html">ColorHunt</a></div>
+          </div>
+
+          <div class="header_right">
+            <nav class="nav">
+              <ul class="nav_list">
+                <li class="nav_item">
+                  <a href="index.html" class="nav_link">Главная</a>
+                </li>
+                <li class="nav_item">
+                  <a href="record.html" class="nav_link active">Рекорд</a>
+                </li>
+              </ul>
+            </nav>
+
+            <div class="header_icons">
+              <a href="signin.html" class="login-icon theme-toggle">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+              </a>
+              <button id="theme-toggle" class="theme-toggle">🌙</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="records" class="content-section">
+      <div class="records-container">
+        <h2>Таблица рекордов</h2>
+
+        <div class="records-list">
+          <div class="record-item">
+            <span class="record-name">Adema</span>
+            <span class="record-score">6/6 за 0.000001 сек</span>
+          </div>
+          <div class="record-item">
+            <span class="record-name">Olzhas</span>
+            <span class="record-score">6/6 за 5 сек</span>
+          </div>
+          <div class="record-item">
+            <span class="record-name">Amir</span>
+            <span class="record-score">3/6 за 148 сек</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        © 2025 ColorHunt by Adema Olzhas Amir | Все права ущемлены у мужлан нет
+        прав
+      </p>
+    </footer>
+
+    <script src="scripts/common.js"></script>
+  </body>
+</html>
