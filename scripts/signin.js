@@ -15,7 +15,7 @@ if (backButton) {
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("confirmPassword");
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // только email-проверка
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -43,7 +43,6 @@ if (backButton) {
     }
 
     form.classList.add("was-validated");
-
     if (!valid || !form.checkValidity()) return;
 
     const user = {
@@ -54,7 +53,8 @@ if (backButton) {
     };
 
     localStorage.setItem("user", JSON.stringify(user));
-    alert("Registration successful! You can now log in.");
+    localStorage.setItem("loggedIn", "true");
+    alert(`Welcome, ${user.firstName || "User"}! Registration successful.`);
     window.location.href = "login.html";
   });
 })();

@@ -1,3 +1,6 @@
+if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+  localStorage.removeItem("tempRecords");
+}
 const themeToggle = document.getElementById("theme-toggle");
 
 if (themeToggle) {

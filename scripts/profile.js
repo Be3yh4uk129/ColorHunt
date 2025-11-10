@@ -12,7 +12,9 @@
   document.getElementById("email").textContent = user.email;
 
   document.getElementById("logout").addEventListener("click", () => {
+    localStorage.removeItem("user");
     localStorage.removeItem("loggedIn");
+    localStorage.removeItem("tempRecords");
     window.location.href = "login.html";
   });
 })();

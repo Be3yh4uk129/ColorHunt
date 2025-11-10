@@ -23,7 +23,6 @@ if (document.getElementById("game")) {
     ? Number(localStorage.getItem("bestTime"))
     : null;
 
-  // Цвета
   function generateColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -55,29 +54,33 @@ if (document.getElementById("game")) {
     return hex.length === 1 ? "0" + hex : hex;
   }
 
-  // Сетка 
   function generateGrid() {
-    answered = false;
-    grid.innerHTML = "";
-    const baseColor = generateColor();
-    correctColor = slightlyDifferent(baseColor);
-    let count = round >= 5 ? 9 : round >= 3 ? 6 : 4;
-    const colors = Array(count).fill(baseColor);
-    const index = Math.floor(Math.random() * count);
-    colors[index] = correctColor;
-    grid.style.gridTemplateColumns = `repeat(${Math.ceil(
-      Math.sqrt(count)
-    )}, 150px)`;
-    colors.forEach((color) => {
-      const square = document.createElement("div");
-      square.classList.add("square");
-      square.style.backgroundColor = color;
-      square.onclick = () => handleSquareClick(color);
-      grid.appendChild(square);
-    });
-  }
+  answered = false;
+  grid.innerHTML = "";
+  const baseColor = generateColor();
+  correctColor = slightlyDifferent(baseColor);
+  let count = round >= 5 ? 9 : round >= 3 ? 6 : 4;
 
-  // Клик по квадрату 
+  const colors = Array(count).fill(baseColor);
+  const index = Math.floor(Math.random() * count);
+  colors[index] = correctColor;
+
+  const columns = Math.ceil(Math.sqrt(count));
+  grid.style.display = "grid";
+  grid.style.gridTemplateColumns = `repeat(${columns}, minmax(80px, 1fr))`;
+  grid.style.gap = "10px";
+  grid.style.justifyItems = "center";
+
+  colors.forEach((color) => {
+    const square = document.createElement("div");
+    square.classList.add("square");
+    square.style.backgroundColor = color;
+    square.onclick = () => handleSquareClick(color);
+    grid.appendChild(square);
+  });
+}
+
+
   function handleSquareClick(selectedColor) {
     if (answered) return;
     if (selectedColor === correctColor) score++;
@@ -86,7 +89,6 @@ if (document.getElementById("game")) {
     answered = true;
   }
 
-  // Следующий раунд
   function nextRound() {
     round++;
     if (round >= 6) {
@@ -97,7 +99,6 @@ if (document.getElementById("game")) {
     }
   }
 
-  // Результаты
   function showResult() {
     clearInterval(timerInterval);
     gameScreen.classList.add("hide");
@@ -113,12 +114,34 @@ if (document.getElementById("game")) {
       recordTime.textContent += " (Новый рекорд!)";
     }
 
-    if (score === 6 && timeTaken <= 60) {
-      createFireworks();
+    let playerName = "NoName";
+
+    try {
+      const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+      if (isLoggedIn && storedUser && storedUser.firstName) {
+        playerName = storedUser.firstName;
+      } else {
+        playerName = "NoName";
+      }
+    } catch (err) {
+      console.warn("Ошибка чтения user:", err);
     }
+
+    const record = {
+      name: playerName,
+      score: `${score}/6 за ${timeTaken} сек`,
+    };
+
+    const tempRecords = JSON.parse(localStorage.getItem("tempRecords")) || [];
+    tempRecords.push(record);
+    localStorage.setItem("tempRecords", JSON.stringify(tempRecords));
+    console.log("Сохранён рекорд:", record);
+
+    createFireworks();
   }
 
-  // Таймер
   function startTimer() {
     startTime = Date.now();
     timerDisplay.textContent = "⏱ Время: 0 сек";
@@ -128,7 +151,6 @@ if (document.getElementById("game")) {
     }, 1000);
   }
 
-  // Кнопки
   startBtn.onclick = () => {
     startScreen.classList.add("hide");
     gameScreen.classList.remove("hide");
@@ -153,12 +175,9 @@ if (document.getElementById("game")) {
     nextBtn.classList.add("hide");
   };
 
-  // Фейерверки
   function createFireworks() {
     const container = document.getElementById("fireworks-container");
     container.innerHTML = "";
-
-    playFireworkSound();
 
     for (let i = 0; i < 50; i++) {
       setTimeout(() => {
@@ -168,25 +187,32 @@ if (document.getElementById("game")) {
   }
 
   function createSingleFirework(container) {
-    const firework = document.createElement("div");
-    firework.className = "firework";
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
-    const colors = ["#FF006E", "#3A86FF", "#8338EC", "#FFBE0B", "#FB5607"];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    const angle = Math.random() * Math.PI * 2;
-    const distance = 50 + Math.random() * 100;
-    const tx = Math.cos(angle) * distance;
-    const ty = Math.sin(angle) * distance;
-    firework.style.cssText = `
-      left: ${x}px;
-      top: ${y}px;
-      background-color: ${color};
-      --tx: ${tx}px;
-      --ty: ${ty}px;
-      box-shadow: 0 0 10px ${color};
-    `;
-    container.appendChild(firework);
-    setTimeout(() => firework.remove(), 1500);
-  }
+  const firework = document.createElement("div");
+  firework.className = "firework";
+
+  const x = Math.random() * window.innerWidth;
+  const y = Math.random() * window.innerHeight;
+
+  const colors = ["#FF006E", "#3A86FF", "#8338EC", "#FFBE0B", "#FB5607"];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 50 + Math.random() * 100;
+  const tx = Math.cos(angle) * distance;
+  const ty = Math.sin(angle) * distance;
+
+  firework.style.cssText = `
+    left: ${x}px;
+    top: ${y}px;
+    background-color: ${color};
+    --tx: ${tx}px;
+    --ty: ${ty}px;
+    box-shadow: 0 0 10px ${color};
+  `;
+
+  container.appendChild(firework);
+
+  setTimeout(() => firework.remove(), 1500);
+}
+
 }

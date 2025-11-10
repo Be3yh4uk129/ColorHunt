@@ -20,13 +20,25 @@
           </div>
 
           <div class="header_right">
-            <nav class="nav">
+            <button
+              class="burger"
+              id="burger"
+              aria-label="Открыть меню"
+              aria-controls="primary-nav"
+              aria-expanded="false"
+            >
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <nav class="nav" id="primary-nav">
               <ul class="nav_list">
                 <li class="nav_item">
                   <a href="index.html" class="nav_link">Главная</a>
                 </li>
                 <li class="nav_item">
                   <a href="record.html" class="nav_link active">Рекорд</a>
+                </li>
+                <li class="nav_item">
+                  <a href="profile.html" class="nav_link">Профиль</a>
                 </li>
               </ul>
             </nav>
@@ -45,32 +57,53 @@
     <section id="records" class="content-section">
       <div class="records-container">
         <h2>Таблица рекордов</h2>
-
-        <div class="records-list">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Поиск игрока..."
+          class="search-box"
+        />
+        <div id="recordsList" class="records-list">
           <div class="record-item">
             <span class="record-name">Adema</span>
             <span class="record-score">6/6 за 0.000001 сек</span>
           </div>
           <div class="record-item">
-            <span class="record-name">Olzhas</span>
-            <span class="record-score">6/6 за 5 сек</span>
+            <span class="record-name">Amir</span>
+            <span class="record-score">6/6 за 0.01 сек</span>
           </div>
           <div class="record-item">
-            <span class="record-name">Amir</span>
-            <span class="record-score">3/6 за 148 сек</span>
+            <span class="record-name">Olzhas</span>
+            <span class="record-score">6/6 за 0.07 сек</span>
           </div>
         </div>
-
       </div>
     </section>
 
     <footer class="footer">
-      <p>
-        © 2025 ColorHunt by Adema Olzhas Amir | Все права ущемлены у мужлан нет
-        прав
-      </p>
+      <div class="container">
+        <div class="footer_inner">
+          <div class="footer_links">
+            <a href="https://www.facebook.com/" class="footer_link"
+              ><i class="fa fa-facebook" aria-hidden="true"></i
+            ></a>
+            <a href="https://www.instagram.com/?hl=ru" class="footer_link"
+              ><i class="fa fa-instagram" aria-hidden="true"></i
+            ></a>
+            <a href="https://x.com/" class="footer_link"
+              ><i class="fa fa-twitter" aria-hidden="true"></i
+            ></a>
+          </div>
+          <span
+            >© 2025 ColorHunt by Adema Olzhas Amir | Все права ущемлены у мужлан
+            нет прав</span
+          >
+        </div>
+      </div>
     </footer>
 
     <script src="scripts/common.js"></script>
+    <script src="scripts/burger.js"></script>
+    <script src="scripts/record.js"></script>
   </body>
 </html>
